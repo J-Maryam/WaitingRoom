@@ -1,13 +1,13 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ITLens
+    url: jdbc:postgresql://localhost:5432/wrm_dev
     username: postgres
     password: @aahmhmm28
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: none
+    show-sql: false
   profiles:
     active: dev
 server:
