@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: wrm
+
+wrm:
+  scheduling:
+    algorithm: "FIFO"
+  capacity:
+    maxPerDay: 15
