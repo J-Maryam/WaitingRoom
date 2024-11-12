@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/wrm_test_db
     username: postgres
-    password: @aahmhmm28
+    password: "@aahmhmm28"
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

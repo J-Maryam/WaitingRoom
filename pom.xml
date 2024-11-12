@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.youcode</groupId>
-    <artifactId>waitingRoom</artifactId>
+    <artifactId>WaitingRoom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>waitingRoom</name>
     <description>waitingRoom</description>
