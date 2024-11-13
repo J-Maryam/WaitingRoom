@@ -14,11 +14,10 @@ public class Visitor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    exist annotation
     private Long id;
 
     @NotBlank
-//    unique value annotation
+    @Column(unique = true)
     private String name;
 
 }
