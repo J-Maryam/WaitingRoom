@@ -1,4 +1,4 @@
-package org.youcode.waitingroom.waitingRoom.domain.entity;
+package org.youcode.waitingroom.visit.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -7,8 +7,9 @@ import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.youcode.waitingroom.waitingRoom.domain.entity.embeddable.VisitId;
-import org.youcode.waitingroom.waitingRoom.domain.entity.enums.Status;
+import org.youcode.waitingroom.waitingRoom.domain.entity.Visitor;
+import org.youcode.waitingroom.waitingRoom.domain.entity.WaitingRoom;
+import org.youcode.waitingroom.visit.domain.enums.Status;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
