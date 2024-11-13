@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.youcode.waitingroom.waitingRoom.domain.entity.enums.TypeMode;
 
 import java.time.LocalDate;
@@ -15,13 +16,14 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Accessors(chain = true)
 public class WaitingRoom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotNull
     @FutureOrPresent
     private LocalDate date;
 
@@ -32,6 +34,6 @@ public class WaitingRoom {
     private String algorithm;
 
     @Enumerated(EnumType.STRING)
-    @NotBlank
+    @NotNull
     private TypeMode mode;
 }
