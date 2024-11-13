@@ -1,4 +1,4 @@
-package org.youcode.waitingroom.waitingRoom.domain.entity.enums;
+package org.youcode.waitingroom.visit.domain.enums;
 
 public enum Status {
     WAITING,
