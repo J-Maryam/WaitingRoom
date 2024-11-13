@@ -7,23 +7,14 @@ services:
       POSTGRES_PASSWORD: "@aahmhmm28"
       POSTGRES_DB: wrm_dev_db
     ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - "5431:5431"
+    command: [ "postgres", "-p", "5431" ]
 
-  wrm-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  pgadmin:
+    image: 'dpage/pgadmin4:latest'
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/wrm_dev_db
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: "@aahmhmm28"
-      SPRING_PROFILES_ACTIVE: dev
+      PGADMIN_DEFAULT_EMAIL: 'maryam@gmail.com'
+      PGADMIN_DEFAULT_PASSWORD: '@aahmhmm28'
+      PGADMIN_LISTEN_PORT: '5050'
     ports:
-      - "8080:8080"
-    depends_on:
-      - postgres
-
-volumes:
-  postgres_data:
+      - "5050:5050"
