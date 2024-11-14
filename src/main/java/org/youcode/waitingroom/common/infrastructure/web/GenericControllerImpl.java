@@ -35,7 +35,7 @@ public class GenericControllerImpl<T, ID, RequestDto, ResponseDto> implements Ge
 
     @Override
     public ResponseEntity<ResponseDto> update(ID id, RequestDto requestDto) {
-        return null;
+        return ResponseEntity.ok(service.update(id, requestDto));
     }
 
     @Override
