@@ -40,6 +40,6 @@ public class GenericControllerImpl<T, ID, RequestDto, ResponseDto> implements Ge
 
     @Override
     public ResponseEntity<Void> delete(ID id) {
-        return null;
-    }
+        service.delete(id);
+        return ResponseEntity.noContent().build();    }
 }
