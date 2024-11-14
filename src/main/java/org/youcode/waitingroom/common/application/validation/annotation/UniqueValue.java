@@ -1,8 +1,8 @@
-package org.youcode.itlens.common.application.validation.annotation;
+package org.youcode.waitingroom.common.application.validation.annotation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import org.youcode.itlens.common.application.validation.validator.UniqueValueValidator;
+import org.youcode.waitingroom.common.application.validation.validator.UniqueValueValidator;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

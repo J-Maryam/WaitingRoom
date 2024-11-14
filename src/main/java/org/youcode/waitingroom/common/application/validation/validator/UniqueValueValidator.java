@@ -1,4 +1,4 @@
-package org.youcode.itlens.common.application.validation.validator;
+package org.youcode.waitingroom.common.application.validation.validator;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -6,7 +6,7 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.youcode.itlens.common.application.validation.annotation.UniqueValue;
+import org.youcode.waitingroom.common.application.validation.annotation.UniqueValue;
 
 @Component
 @RequiredArgsConstructor
