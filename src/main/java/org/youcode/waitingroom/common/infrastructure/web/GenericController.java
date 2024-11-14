@@ -8,7 +8,10 @@ import org.youcode.waitingroom.common.application.dto.PagedResponse;
 
 public interface GenericController<ID, RequestDto, ResponseDto> {
     @GetMapping
-    ResponseEntity<PagedResponse<ResponseDto>> getAll(Pageable pageable);
+    ResponseEntity<PagedResponse<ResponseDto>> getAll(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    );
 
     @GetMapping("/{id}")
     ResponseEntity<ResponseDto> getById(@PathVariable ID id);
