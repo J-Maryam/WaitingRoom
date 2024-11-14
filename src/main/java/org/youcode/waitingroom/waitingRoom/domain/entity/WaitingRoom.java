@@ -8,10 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.youcode.waitingroom.visit.domain.Visit;
 import org.youcode.waitingroom.waitingRoom.domain.entity.enums.Algorithm;
 import org.youcode.waitingroom.waitingRoom.domain.entity.enums.TypeMode;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -37,4 +39,7 @@ public class WaitingRoom {
     @Enumerated(EnumType.STRING)
     @NotNull
     private TypeMode mode;
+
+    @OneToMany(mappedBy = "visitor")
+    private List<Visit> visits;
 }
