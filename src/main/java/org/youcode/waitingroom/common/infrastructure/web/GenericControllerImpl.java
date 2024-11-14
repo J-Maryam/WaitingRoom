@@ -25,7 +25,7 @@ public class GenericControllerImpl<T, ID, RequestDto, ResponseDto> implements Ge
 
     @Override
     public ResponseEntity<ResponseDto> getById(ID id) {
-        return null;
+        return ResponseEntity.ok(service.getById(id));
     }
 
     @Override
