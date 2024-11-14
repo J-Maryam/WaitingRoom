@@ -9,6 +9,7 @@ spring:
 
 wrm:
   scheduling:
-    algorithm: "FIFO"
+    mode: FULL_TIME
+    algorithm: FIFO
   capacity:
     maxPerDay: 15
