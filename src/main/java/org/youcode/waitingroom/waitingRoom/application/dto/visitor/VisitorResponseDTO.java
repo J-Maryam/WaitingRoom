@@ -1,8 +1,13 @@
 package org.youcode.waitingroom.waitingRoom.application.dto.visitor;
 
 import jakarta.validation.constraints.NotBlank;
+import org.youcode.waitingroom.visit.domain.Visit;
 
-public record VisitorRequestDTO(
-        @NotBlank String name
+import java.util.List;
+
+public record VisitorResponseDTO(
+        Long id,
+        String name,
+        List<Visit> visits
 ) {
 }
