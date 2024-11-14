@@ -8,6 +8,7 @@ public class WaitingRoomApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(WaitingRoomApplication.class, args);
+        System.out.println("Waiting Room Application Started");
     }
 
 }
