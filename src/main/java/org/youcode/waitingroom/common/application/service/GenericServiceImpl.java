@@ -62,6 +62,9 @@ public class GenericServiceImpl<T, ID, RequestDto, ResponseDto> implements Gener
 
     @Override
     public void delete(ID id) {
-
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException("Entity with Id " + id + " not found");
+        }
+        repository.deleteById(id);
     }
 }
