@@ -12,7 +12,7 @@ import org.youcode.waitingroom.common.application.service.GenericService;
 @RestController
 @RequestMapping()
 @RequiredArgsConstructor
-public class GenericControllerImpl<T, ID, RequestDto, ResponseDto> implements GenericController<ID, RequestDto, ResponseDto>{
+public class GenericControllerImpl<T, ID, RequestDto, ResponseDto> implements GenericController<ID, RequestDto, ResponseDto> {
 
     private final GenericService<T, ID, RequestDto, ResponseDto> service;
 
@@ -41,5 +41,6 @@ public class GenericControllerImpl<T, ID, RequestDto, ResponseDto> implements Ge
     @Override
     public ResponseEntity<Void> delete(ID id) {
         service.delete(id);
-        return ResponseEntity.noContent().build();    }
+        return ResponseEntity.noContent().build();
+    }
 }
