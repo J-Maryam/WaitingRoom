@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.youcode.waitingroom.visit.domain.Visit;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -19,5 +22,8 @@ public class Visitor {
     @NotBlank
     @Column(unique = true)
     private String name;
+
+    @OneToMany(mappedBy = "visitor")
+    private List<Visit> visits;
 
 }
