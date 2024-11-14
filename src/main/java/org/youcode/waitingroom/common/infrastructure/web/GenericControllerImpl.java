@@ -9,16 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.youcode.waitingroom.common.application.dto.PagedResponse;
 import org.youcode.waitingroom.common.application.service.GenericService;
 
-@RestController
-@RequestMapping()
 @RequiredArgsConstructor
-public class GenericControllerImpl<T, ID, RequestDto, ResponseDto> implements GenericController<ID, RequestDto, ResponseDto> {
+public abstract class GenericControllerImpl<T, ID, RequestDto, ResponseDto> implements GenericController<ID, RequestDto, ResponseDto> {
 
     private final GenericService<T, ID, RequestDto, ResponseDto> service;
 
     @Override
-    public ResponseEntity<PagedResponse<ResponseDto>> getAll(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public ResponseEntity<PagedResponse<ResponseDto>> getAll(Pageable pageable) {
         PagedResponse<ResponseDto> response = service.getAll(pageable);
         return ResponseEntity.ok(response);
     }
