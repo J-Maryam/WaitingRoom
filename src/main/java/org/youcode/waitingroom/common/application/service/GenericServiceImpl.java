@@ -45,7 +45,9 @@ public class GenericServiceImpl<T, ID, RequestDto, ResponseDto> implements Gener
 
     @Override
     public ResponseDto create(RequestDto requestDto) {
-        return null;
+        T entity = mapper.toEntity(requestDto);
+        T savedEntity = repository.save(entity);
+        return mapper.toDto(savedEntity);
     }
 
     @Override
