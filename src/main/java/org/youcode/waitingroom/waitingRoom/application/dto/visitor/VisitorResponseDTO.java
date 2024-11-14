@@ -8,6 +8,6 @@ import java.util.List;
 public record VisitorResponseDTO(
         Long id,
         String name,
-        List<Visit> visits
+        List<VisitorResponseDTO> visits
 ) {
 }
