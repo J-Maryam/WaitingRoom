@@ -1,7 +1,7 @@
 package org.youcode.waitingroom.waitingRoom.domain.entity.enums;
 
 public enum Algorithm {
-    FIFI,
+    FIFO,
     HPF,
     SJF
 }
