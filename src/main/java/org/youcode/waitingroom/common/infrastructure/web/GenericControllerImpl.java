@@ -30,7 +30,7 @@ public class GenericControllerImpl<T, ID, RequestDto, ResponseDto> implements Ge
 
     @Override
     public ResponseEntity<ResponseDto> create(RequestDto requestDto) {
-        return null;
+        return ResponseEntity.ok(service.create(requestDto));
     }
 
     @Override
