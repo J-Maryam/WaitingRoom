@@ -52,7 +52,12 @@ public class GenericServiceImpl<T, ID, RequestDto, ResponseDto> implements Gener
 
     @Override
     public ResponseDto update(ID id, RequestDto requestDto) {
-        return null;
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException("Entity with Id " + id + " not found");
+        }
+        T entity = mapper.toEntity(requestDto);
+        T updatedEntity = repository.save(entity);
+        return mapper.toDto(updatedEntity);
     }
 
     @Override
