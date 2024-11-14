@@ -1,6 +1,7 @@
 package org.youcode.waitingroom.common.application.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.youcode.waitingroom.common.application.dto.PagedResponse;
 import org.youcode.waitingroom.common.application.mapper.GenericMapper;
+import org.youcode.waitingroom.common.domain.exception.EntityNotFoundException;
 
 import java.util.List;
 
@@ -37,7 +39,8 @@ public class GenericServiceImpl<T, ID, RequestDto, ResponseDto> implements Gener
 
     @Override
     public ResponseDto getById(ID id) {
-        return null;
+        return repository.findById(id).map(mapper::toDto)
+                .orElseThrow(() -> new EntityNotFoundException("Entity with Id " + id + " not found"));
     }
 
     @Override
