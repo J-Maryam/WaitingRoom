@@ -1,4 +1,4 @@
-package org.youcode.waitingroom.visit.domain;
+package org.youcode.waitingroom.visit.domain.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

@@ -2,13 +2,12 @@ package org.youcode.waitingroom.waitingRoom.domain.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import org.youcode.waitingroom.visit.domain.Visit;
+import org.youcode.waitingroom.visit.domain.entity.Visit;
 import org.youcode.waitingroom.waitingRoom.domain.entity.enums.Algorithm;
 import org.youcode.waitingroom.waitingRoom.domain.entity.enums.TypeMode;
 

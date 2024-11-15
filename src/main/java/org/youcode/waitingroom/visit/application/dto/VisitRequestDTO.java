@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import org.youcode.waitingroom.common.application.validation.annotation.Exists;
-import org.youcode.waitingroom.visit.domain.enums.Status;
+import org.youcode.waitingroom.visit.domain.entity.enums.Status;
 import org.youcode.waitingroom.waitingRoom.application.dto.visitor.VisitorResponseDTO;
 import org.youcode.waitingroom.waitingRoom.application.dto.waitingRoom.WaitingRoomResponseDTO;
 import org.youcode.waitingroom.waitingRoom.domain.entity.Visitor;

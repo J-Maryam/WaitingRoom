@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.youcode.waitingroom.visit.domain.Visit;
+import org.youcode.waitingroom.visit.domain.entity.Visit;
 
 import java.util.List;
 
