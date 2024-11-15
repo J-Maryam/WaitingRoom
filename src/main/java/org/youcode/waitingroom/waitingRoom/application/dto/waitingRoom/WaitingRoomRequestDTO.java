@@ -18,13 +18,10 @@ public record WaitingRoomRequestDTO(
         @FutureOrPresent
         LocalDate date,
 
-        @NotNull
         int capacity,
 
-        @NotBlank
         Algorithm algorithm,
 
-        @NotNull
         TypeMode mode
 ) {
 }

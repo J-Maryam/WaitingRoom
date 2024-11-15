@@ -29,14 +29,11 @@ public class WaitingRoom {
     @FutureOrPresent
     private LocalDate date;
 
-    @NotNull
     private int capacity;
 
-    @NotNull
     private Algorithm algorithm;
 
     @Enumerated(EnumType.STRING)
-    @NotNull
     private TypeMode mode;
 
     @OneToMany(mappedBy = "waitingRoom")
