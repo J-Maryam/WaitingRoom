@@ -31,6 +31,7 @@ public class WaitingRoom {
 
     private int capacity;
 
+    @Enumerated(EnumType.STRING)
     private Algorithm algorithm;
 
     @Enumerated(EnumType.STRING)
