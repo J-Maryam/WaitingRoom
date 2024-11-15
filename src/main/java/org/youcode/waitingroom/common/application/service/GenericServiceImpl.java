@@ -23,6 +23,11 @@ public class GenericServiceImpl<T, ID, RequestDto, ResponseDto> implements Gener
     protected JpaRepository<T, ID> repository;
     protected GenericMapper<T, RequestDto, ResponseDto> mapper;
 
+    public GenericServiceImpl(JpaRepository<T, ID> repository, GenericMapper<T, RequestDto, ResponseDto> mapper) {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
+
     @Override
     public PagedResponse<ResponseDto> getAll(Pageable pageable) {
         Page<T> dtoPage = repository.findAll(pageable);
