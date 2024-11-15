@@ -6,6 +6,7 @@ import org.youcode.waitingroom.waitingRoom.domain.entity.enums.TypeMode;
 import java.time.LocalDate;
 
 public record EmbeddableWaitingRoomResponseDTO(
+        Long id,
         LocalDate date,
         int capacity,
         Algorithm algorithm,
