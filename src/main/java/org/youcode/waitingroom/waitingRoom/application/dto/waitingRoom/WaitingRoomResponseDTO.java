@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record WaitingRoomResponseDTO(
+        Long id,
         LocalDate date,
         int capacity,
         Algorithm algorithm,
