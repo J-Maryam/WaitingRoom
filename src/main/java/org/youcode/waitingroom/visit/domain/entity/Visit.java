@@ -46,8 +46,8 @@ public class Visit {
     private Visitor visitor;
 
     @ManyToOne
-    @MapsId("waitingRoomId")
-    @JoinColumn(name = "waiting_room_id")
+    @MapsId("waitingListId")
+    @JoinColumn(name = "waiting_list_id")
     private WaitingRoom waitingRoom;
 
 }

@@ -39,6 +39,6 @@ public class WaitingRoom {
     @NotNull
     private TypeMode mode;
 
-    @OneToMany(mappedBy = "visitor")
+    @OneToMany(mappedBy = "waitingRoom")
     private List<Visit> visits;
 }
