@@ -5,20 +5,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.youcode.waitingroom.common.application.dto.PagedResponse;
+import org.youcode.waitingroom.waitingRoom.application.dto.ApiResponse;
 
 public interface GenericController<ID, RequestDto, ResponseDto> {
     @GetMapping
-    ResponseEntity<PagedResponse<ResponseDto>> getAll(Pageable pageable);
+    ResponseEntity<ApiResponse<PagedResponse<ResponseDto>>> getAll(Pageable pageable);
 
     @GetMapping("/{id}")
-    ResponseEntity<ResponseDto> getById(@PathVariable ID id);
+    ResponseEntity<ApiResponse<ResponseDto>> getById(@PathVariable ID id);
 
     @PostMapping
-    ResponseEntity<ResponseDto> create(@RequestBody @Valid RequestDto requestDto);
+    ResponseEntity<ApiResponse<ResponseDto>> create(@RequestBody @Valid RequestDto requestDto);
 
     @PutMapping("/{id}")
-    ResponseEntity<ResponseDto> update(@PathVariable ID id, @RequestBody @Valid RequestDto requestDto);
+    ResponseEntity<ApiResponse<ResponseDto>> update(@PathVariable ID id, @RequestBody @Valid RequestDto requestDto);
 
     @DeleteMapping("/{id}")
-    ResponseEntity<Void> delete(@PathVariable ID id);
+    ResponseEntity<ApiResponse<Void>> delete(@PathVariable ID id);
 }

@@ -4,6 +4,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.youcode.waitingroom.common.application.dto.PagedResponse;
 import org.youcode.waitingroom.common.application.service.GenericService;
+import org.youcode.waitingroom.waitingRoom.application.dto.ApiResponse;
 
 public abstract class GenericControllerImpl<T, ID, RequestDto, ResponseDto> implements GenericController<ID, RequestDto, ResponseDto> {
 
@@ -14,29 +15,32 @@ public abstract class GenericControllerImpl<T, ID, RequestDto, ResponseDto> impl
     }
 
     @Override
-    public ResponseEntity<PagedResponse<ResponseDto>> getAll(Pageable pageable) {
+    public ResponseEntity<ApiResponse<PagedResponse<ResponseDto>>> getAll(Pageable pageable) {
         PagedResponse<ResponseDto> response = service.getAll(pageable);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(ApiResponse.success(response, "Data retrieved successfully"));
     }
 
     @Override
-    public ResponseEntity<ResponseDto> getById(ID id) {
-        return ResponseEntity.ok(service.getById(id));
+    public ResponseEntity<ApiResponse<ResponseDto>> getById(ID id) {
+        ResponseDto dto = service.getById(id);
+        return ResponseEntity.ok(ApiResponse.success(dto, "Item retrieved successfully"));
     }
 
     @Override
-    public ResponseEntity<ResponseDto> create(RequestDto requestDto) {
-        return ResponseEntity.ok(service.create(requestDto));
+    public ResponseEntity<ApiResponse<ResponseDto>> create(RequestDto requestDto) {
+        ResponseDto createdDto = service.create(requestDto);
+        return ResponseEntity.ok(ApiResponse.success(createdDto, "Item created successfully"));
     }
 
     @Override
-    public ResponseEntity<ResponseDto> update(ID id, RequestDto requestDto) {
-        return ResponseEntity.ok(service.update(id, requestDto));
+    public ResponseEntity<ApiResponse<ResponseDto>> update(ID id, RequestDto requestDto) {
+        ResponseDto updatedDto = service.update(id, requestDto);
+        return ResponseEntity.ok(ApiResponse.success(updatedDto, "Item updated successfully"));
     }
 
     @Override
-    public ResponseEntity<Void> delete(ID id) {
+    public ResponseEntity<ApiResponse<Void>> delete(ID id) {
         service.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(ApiResponse.success(null, "Item deleted successfully"));
     }
 }
