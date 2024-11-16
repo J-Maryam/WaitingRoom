@@ -36,4 +36,13 @@ public class VisitController extends GenericControllerImpl<Visit, VisitId, Visit
         VisitResponseDTO updatedVisit = service.update(new VisitId(visitorId, waitingListId), visitRequestDTO);
         return ResponseEntity.ok(ApiResponse.success(updatedVisit, "Visit updated successfully"));
     }
+
+    @DeleteMapping("/{visitorId}/{waitingListId}")
+    public ResponseEntity<ApiResponse<Void>> delete(
+            @PathVariable Long visitorId,
+            @PathVariable Long waitingListId) {
+
+        service.delete(new VisitId(visitorId, waitingListId));
+        return ResponseEntity.ok(ApiResponse.success(null, "Visit deleted successfully"));
+    }
 }

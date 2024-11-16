@@ -97,5 +97,5 @@ public class VisitServiceImpl extends GenericServiceImpl<Visit, VisitId, VisitRe
         Visit existingVisit = repository.findById(visitId)
                 .orElseThrow(() -> new EntityNotFoundException("Visit not found with visitorId: " + visitId.visitorId() + " and waitingListId: " + visitId.waitingListId()));
         repository.delete(existingVisit);
-    }g
+    }
 }
