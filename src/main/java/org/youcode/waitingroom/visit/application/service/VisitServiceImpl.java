@@ -10,6 +10,7 @@ import org.youcode.waitingroom.visit.application.dto.VisitRequestDTO;
 import org.youcode.waitingroom.visit.application.dto.VisitResponseDTO;
 import org.youcode.waitingroom.visit.application.mapper.VisitMapper;
 import org.youcode.waitingroom.visit.domain.entity.Visit;
+import org.youcode.waitingroom.visit.domain.entity.VisitId;
 import org.youcode.waitingroom.visit.domain.repository.VisitRepository;
 import org.youcode.waitingroom.waitingRoom.domain.entity.Visitor;
 import org.youcode.waitingroom.waitingRoom.domain.entity.WaitingRoom;
@@ -19,7 +20,7 @@ import org.youcode.waitingroom.waitingRoom.domain.repository.WaitingRoomReposito
 @Service
 @Transactional
 @Validated
-public class VisitServiceImpl extends GenericServiceImpl<Visit, Long, VisitRequestDTO, VisitResponseDTO> implements VisitService {
+public class VisitServiceImpl extends GenericServiceImpl<Visit, VisitId, VisitRequestDTO, VisitResponseDTO> implements VisitService {
     private final VisitorRepository visitorRepository;
     private final WaitingRoomRepository waitingRoomRepository;
     private final int defaultPriority;
@@ -35,6 +36,13 @@ public class VisitServiceImpl extends GenericServiceImpl<Visit, Long, VisitReque
         this.visitorRepository = visitorRepository;
         this.waitingRoomRepository = waitingRoomRepository;
         this.defaultPriority = defaultPriority;
+    }
+
+    @Override
+    public VisitResponseDTO getById(VisitId visitId) {
+        Visit visit = repository.findById(visitId)
+                .orElseThrow(() -> new EntityNotFoundException("Visit not found with visitorId: " + visitId.visitorId() + " and waitingListId: " + visitId.waitingListId()));
+        return mapper.toDto(visit);
     }
 
     @Override
