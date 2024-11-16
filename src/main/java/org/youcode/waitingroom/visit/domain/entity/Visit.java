@@ -27,7 +27,7 @@ public class Visit {
     private LocalDate arrivalTime;
 
     @Enumerated(EnumType.STRING)
-    @NotBlank
+    @NotNull
     private Status status;
 
     private int priority;

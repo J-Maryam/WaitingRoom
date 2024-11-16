@@ -24,7 +24,7 @@ public record VisitRequestDTO(
         @PastOrPresent
         LocalDateTime arrivalTime,
 
-        @NotBlank
+        @NotNull
         Status status,
 
         int priority,
