@@ -17,6 +17,8 @@ import org.youcode.waitingroom.waitingRoom.domain.entity.WaitingRoom;
 import org.youcode.waitingroom.waitingRoom.domain.repository.VisitorRepository;
 import org.youcode.waitingroom.waitingRoom.domain.repository.WaitingRoomRepository;
 
+import java.time.LocalDate;
+
 @Service
 @Transactional
 @Validated
@@ -65,19 +67,24 @@ public class VisitServiceImpl extends GenericServiceImpl<Visit, VisitId, VisitRe
     }
 
     @Override
-    public VisitResponseDTO update(VisitId visitId, VisitRequestDTO visitRequestDTO) {
+    public VisitResponseDTO update(VisitId visitId, VisitRequestDTO requestDTO) {
         Visit existingVisit = repository.findById(visitId)
                 .orElseThrow(() -> new EntityNotFoundException("Visit not found with visitorId: " + visitId.visitorId() + " and waitingListId: " + visitId.waitingListId()));
 
-        Visitor visitor = visitorRepository.findById(visitRequestDTO.visitorId())
-                .orElseThrow(() -> new EntityNotFoundException("Visitor not found with id: " + visitRequestDTO.visitorId()));
+        Visitor visitor = visitorRepository.findById(requestDTO.visitorId())
+                .orElseThrow(() -> new EntityNotFoundException("Visitor not found with id: " + requestDTO.visitorId()));
 
-        WaitingRoom waitingRoom = waitingRoomRepository.findById(visitRequestDTO.waitingRoomId())
-                .orElseThrow(() -> new EntityNotFoundException("Waiting room not found with id: " + visitRequestDTO.waitingRoomId()));
+        WaitingRoom waitingRoom = waitingRoomRepository.findById(requestDTO.waitingRoomId())
+                .orElseThrow(() -> new EntityNotFoundException("Waiting room not found with id: " + requestDTO.waitingRoomId()));
 
-        int priority = (visitRequestDTO.priority() == 0) ? defaultPriority : visitRequestDTO.priority();
+        int priority = (requestDTO.priority() == 0) ? defaultPriority : requestDTO.priority();
 
         existingVisit.setPriority(priority);
+        existingVisit.setEstimatedProcessingTime(requestDTO.estimatedProcessingTime());
+        existingVisit.setArrivalTime(LocalDate.from(requestDTO.arrivalTime()));
+        existingVisit.setStatus(requestDTO.status());
+        existingVisit.setStartTime(requestDTO.startTime());
+        existingVisit.setEndTime(requestDTO.endTime());
         existingVisit.setVisitor(visitor);
         existingVisit.setWaitingRoom(waitingRoom);
 
