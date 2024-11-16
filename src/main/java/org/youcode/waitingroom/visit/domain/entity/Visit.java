@@ -30,7 +30,7 @@ public class Visit {
     @NotBlank
     private Status status;
 
-    private byte priority;
+    private int priority;
 
     @NotNull
     private int estimatedProcessingTime;

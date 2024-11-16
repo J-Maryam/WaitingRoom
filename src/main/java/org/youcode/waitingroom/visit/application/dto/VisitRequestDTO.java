@@ -27,7 +27,7 @@ public record VisitRequestDTO(
         @NotBlank
         Status status,
 
-        Byte priority,
+        int priority,
 
         @NotNull
         int estimatedProcessingTime,
