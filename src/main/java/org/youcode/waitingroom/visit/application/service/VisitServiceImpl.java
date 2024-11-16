@@ -91,4 +91,11 @@ public class VisitServiceImpl extends GenericServiceImpl<Visit, VisitId, VisitRe
         Visit updatedVisit = repository.save(existingVisit);
         return mapper.toDto(updatedVisit);
     }
+
+    @Override
+    public void delete(VisitId visitId) {
+        Visit existingVisit = repository.findById(visitId)
+                .orElseThrow(() -> new EntityNotFoundException("Visit not found with visitorId: " + visitId.visitorId() + " and waitingListId: " + visitId.waitingListId()));
+        repository.delete(existingVisit);
+    }g
 }
