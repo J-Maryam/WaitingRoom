@@ -4,6 +4,7 @@ import org.youcode.waitingroom.common.application.service.GenericService;
 import org.youcode.waitingroom.visit.application.dto.VisitRequestDTO;
 import org.youcode.waitingroom.visit.application.dto.VisitResponseDTO;
 import org.youcode.waitingroom.visit.domain.entity.Visit;
+import org.youcode.waitingroom.visit.domain.entity.VisitId;
 
-public interface VisitService extends GenericService<Visit, Long, VisitRequestDTO, VisitResponseDTO> {
+public interface VisitService extends GenericService<Visit, VisitId, VisitRequestDTO, VisitResponseDTO> {
 }
