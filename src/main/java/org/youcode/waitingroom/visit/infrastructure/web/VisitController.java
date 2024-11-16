@@ -1,10 +1,8 @@
 package org.youcode.waitingroom.visit.infrastructure.web;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.youcode.waitingroom.common.infrastructure.web.GenericControllerImpl;
 import org.youcode.waitingroom.visit.application.dto.VisitRequestDTO;
 import org.youcode.waitingroom.visit.application.dto.VisitResponseDTO;
@@ -27,5 +25,15 @@ public class VisitController extends GenericControllerImpl<Visit, VisitId, Visit
 
         VisitResponseDTO visitDto = service.getById(new VisitId(visitorId, waitingListId));
         return ResponseEntity.ok(ApiResponse.success(visitDto, "Visit retrieved successfully"));
+    }
+
+    @PutMapping("/{visitorId}/{waitingListId}")
+    public ResponseEntity<ApiResponse<VisitResponseDTO>> update(
+            @PathVariable Long visitorId,
+            @PathVariable Long waitingListId,
+            @RequestBody @Valid VisitRequestDTO visitRequestDTO) {
+
+        VisitResponseDTO updatedVisit = service.update(new VisitId(visitorId, waitingListId), visitRequestDTO);
+        return ResponseEntity.ok(ApiResponse.success(updatedVisit, "Visit updated successfully"));
     }
 }
