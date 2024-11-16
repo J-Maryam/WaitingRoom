@@ -11,5 +11,6 @@ wrm:
   scheduling:
     mode: FULL_TIME
     algorithm: FIFO
+    priority: 255
   capacity:
     maxPerDay: 15
