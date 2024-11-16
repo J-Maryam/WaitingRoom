@@ -1,7 +1,6 @@
 package org.youcode.waitingroom.waitingRoom.application.dto.waitingRoom;
 
 import org.youcode.waitingroom.visit.application.dto.VisitResponseDTO;
-import org.youcode.waitingroom.waitingRoom.application.dto.visitor.VisitorResponseDTO;
 import org.youcode.waitingroom.waitingRoom.domain.entity.enums.Algorithm;
 import org.youcode.waitingroom.waitingRoom.domain.entity.enums.TypeMode;
 

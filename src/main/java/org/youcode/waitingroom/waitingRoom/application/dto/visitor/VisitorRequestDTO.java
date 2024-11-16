@@ -1,7 +1,6 @@
 package org.youcode.waitingroom.waitingRoom.application.dto.visitor;
 
 import jakarta.validation.constraints.NotBlank;
-import org.youcode.waitingroom.common.application.validation.annotation.Exists;
 import org.youcode.waitingroom.common.application.validation.annotation.UniqueValue;
 import org.youcode.waitingroom.waitingRoom.domain.entity.Visitor;
 
