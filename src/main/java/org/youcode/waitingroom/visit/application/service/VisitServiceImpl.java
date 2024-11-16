@@ -63,4 +63,25 @@ public class VisitServiceImpl extends GenericServiceImpl<Visit, VisitId, VisitRe
         Visit savedVisit = repository.save(visit);
         return mapper.toDto(savedVisit);
     }
+
+    @Override
+    public VisitResponseDTO update(VisitId visitId, VisitRequestDTO visitRequestDTO) {
+        Visit existingVisit = repository.findById(visitId)
+                .orElseThrow(() -> new EntityNotFoundException("Visit not found with visitorId: " + visitId.visitorId() + " and waitingListId: " + visitId.waitingListId()));
+
+        Visitor visitor = visitorRepository.findById(visitRequestDTO.visitorId())
+                .orElseThrow(() -> new EntityNotFoundException("Visitor not found with id: " + visitRequestDTO.visitorId()));
+
+        WaitingRoom waitingRoom = waitingRoomRepository.findById(visitRequestDTO.waitingRoomId())
+                .orElseThrow(() -> new EntityNotFoundException("Waiting room not found with id: " + visitRequestDTO.waitingRoomId()));
+
+        int priority = (visitRequestDTO.priority() == 0) ? defaultPriority : visitRequestDTO.priority();
+
+        existingVisit.setPriority(priority);
+        existingVisit.setVisitor(visitor);
+        existingVisit.setWaitingRoom(waitingRoom);
+
+        Visit updatedVisit = repository.save(existingVisit);
+        return mapper.toDto(updatedVisit);
+    }
 }
