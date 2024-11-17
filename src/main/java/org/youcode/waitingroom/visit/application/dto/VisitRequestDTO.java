@@ -1,5 +1,7 @@
 package org.youcode.waitingroom.visit.application.dto;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
 import org.youcode.waitingroom.visit.domain.entity.enums.Status;
@@ -17,7 +19,7 @@ public record VisitRequestDTO(
         @PastOrPresent
         LocalDateTime arrivalTime,
 
-        @NotNull
+        @Enumerated(EnumType.STRING)
         Status status,
 
         int priority,

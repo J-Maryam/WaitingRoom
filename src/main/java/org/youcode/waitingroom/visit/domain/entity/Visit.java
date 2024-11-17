@@ -24,7 +24,7 @@ public class Visit {
     private VisitId id;
 
     @PastOrPresent
-    private LocalDate arrivalTime;
+    private LocalDateTime arrivalTime;
 
     @Enumerated(EnumType.STRING)
     @NotNull
