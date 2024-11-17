@@ -33,9 +33,15 @@ public class WaitingRoomServiceImpl extends GenericServiceImpl<WaitingRoom, Long
     public WaitingRoomResponseDTO create(WaitingRoomRequestDTO requestDto) {
         WaitingRoom waitingRoom = mapper.toEntity(requestDto);
 
-        waitingRoom.setMode(wrmConfigProperties.getMode());
-        waitingRoom.setAlgorithm(wrmConfigProperties.getAlgorithm());
-        waitingRoom.setCapacity(wrmConfigProperties.getMaxPerDay());
+        if (requestDto.mode() == null) {
+            waitingRoom.setMode(wrmConfigProperties.getMode());
+        }
+        if (requestDto.algorithm() == null) {
+            waitingRoom.setAlgorithm(wrmConfigProperties.getAlgorithm());
+        }
+        if (requestDto.capacity() == 0) {
+            waitingRoom.setCapacity(wrmConfigProperties.getMaxPerDay());
+        }
 
         WaitingRoom savedEntity = repository.save(waitingRoom);
         return mapper.toDto(savedEntity);
