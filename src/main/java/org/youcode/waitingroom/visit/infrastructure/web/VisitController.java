@@ -1,8 +1,10 @@
 package org.youcode.waitingroom.visit.infrastructure.web;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.youcode.waitingroom.common.application.dto.PagedResponse;
 import org.youcode.waitingroom.common.infrastructure.web.GenericControllerImpl;
 import org.youcode.waitingroom.visit.application.dto.VisitRequestDTO;
 import org.youcode.waitingroom.visit.application.dto.VisitResponseDTO;
@@ -14,8 +16,20 @@ import org.youcode.waitingroom.waitingRoom.application.dto.ApiResponse;
 @RestController
 @RequestMapping("/api/visits")
 public class VisitController extends GenericControllerImpl<Visit, VisitId, VisitRequestDTO, VisitResponseDTO> {
+    private final VisitService visitService;
+
     public VisitController(VisitService service) {
         super(service);
+        this.visitService = service;
+    }
+
+    @GetMapping("/waiting-room/{waitingRoomId}")
+    public ResponseEntity<ApiResponse<PagedResponse<VisitResponseDTO>>> getAllVisitorsForWaitingRoom(
+            @PathVariable Long waitingRoomId,
+            Pageable pageable) {
+
+        PagedResponse<VisitResponseDTO> visits = visitService.getAllVisitorsForWaitingRoom(waitingRoomId, pageable);
+        return ResponseEntity.ok(ApiResponse.success(visits, "Visitors retrieved successfully"));
     }
 
     @GetMapping("/{visitorId}/{waitingListId}")
