@@ -15,7 +15,6 @@ public record VisitRequestDTO(
         @NotNull
         Long waitingRoomId,
 
-        @NotNull
         @PastOrPresent
         LocalDateTime arrivalTime,
 
