@@ -128,8 +128,8 @@ public class VisitServiceImpl extends GenericServiceImpl<Visit, VisitId, VisitRe
         if (requestDTO.arrivalTime() != null) {
             existingVisit.setArrivalTime(LocalDateTime.from(requestDTO.arrivalTime()));
         }
-        if (requestDTO.status() != null) {
-            existingVisit.setStatus(requestDTO.status());
+        if (requestDTO.status() != null && !requestDTO.status().equals(existingVisit.getStatus())) {
+            return updateStatus(visitId.visitorId(), visitId.waitingListId(), requestDTO.status());
         }
         if (requestDTO.startTime() != null) {
             existingVisit.setStartTime(requestDTO.startTime());
@@ -154,6 +154,79 @@ public class VisitServiceImpl extends GenericServiceImpl<Visit, VisitId, VisitRe
         Visit existingVisit = repository.findById(visitId)
                 .orElseThrow(() -> new EntityNotFoundException("Visit not found with visitorId: " + visitId.visitorId() + " and waitingListId: " + visitId.waitingListId()));
         repository.delete(existingVisit);
+    }
+
+    private VisitResponseDTO updateStatus(Long visitorId, Long waitingRoomId, Status newStatus) {
+        VisitId visitId = new VisitId(visitorId, waitingRoomId);
+        Visit visit = repository.findById(visitId)
+                .orElseThrow(() -> new EntityNotFoundException("Visit not found with visitorId: " + visitorId + " and waitingRoomId: " + waitingRoomId));
+
+        switch (newStatus) {
+            case IN_PROGRESS:
+                startService(visitorId, waitingRoomId);
+                break;
+            case FINISHED:
+                completeService(visitorId, waitingRoomId);
+                break;
+            case CANCELLED:
+                cancelService(visitorId, waitingRoomId);
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported status: " + newStatus);
+        }
+
+        visit.setStatus(newStatus);
+        Visit updatedVisit = repository.save(visit);
+        return mapper.toDto(updatedVisit);
+    }
+
+    private VisitResponseDTO startService(Long visitorId, Long waitingRoomId) {
+        VisitId visitId = new VisitId(visitorId, waitingRoomId);
+        Visit visit = repository.findById(visitId)
+                .orElseThrow(() -> new EntityNotFoundException("Visit not found with visitorId: " + visitorId + " and waitingRoomId: " + waitingRoomId));
+
+        if (visit.getStatus() != Status.WAITING) {
+            throw new IllegalStateException("Visit is not in a WAITING state.");
+        }
+
+        visit.setStartTime(LocalDateTime.now());
+        visit.setStatus(Status.IN_PROGRESS);
+
+        Visit updatedVisit = repository.save(visit);
+        return mapper.toDto(updatedVisit);
+    }
+
+    private VisitResponseDTO completeService(Long visitorId, Long waitingRoomId) {
+        VisitId visitId = new VisitId(visitorId, waitingRoomId);
+        Visit visit = repository.findById(visitId)
+                .orElseThrow(() -> new EntityNotFoundException("Visit not found with visitorId: " + visitorId + " and waitingRoomId: " + waitingRoomId));
+
+        if (visit.getStatus() != Status.IN_PROGRESS) {
+            throw new IllegalStateException("Visit is not in an IN_PROGRESS state.");
+        }
+
+        visit.setEndTime(LocalDateTime.now());
+        visit.setStatus(Status.FINISHED);
+
+        Visit updatedVisit = repository.save(visit);
+        return mapper.toDto(updatedVisit);
+    }
+
+    private VisitResponseDTO cancelService(Long visitorId, Long waitingRoomId) {
+        VisitId visitId = new VisitId(visitorId, waitingRoomId);
+        Visit visit = repository.findById(visitId)
+                .orElseThrow(() -> new EntityNotFoundException("Visit not found with visitorId: " + visitorId + " and waitingRoomId: " + waitingRoomId));
+
+        if (visit.getStatus() == Status.FINISHED) {
+            throw new IllegalStateException("Cannot cancel a completed service.");
+        }
+
+        visit.setStatus(Status.CANCELLED);
+        visit.setStartTime(null);
+        visit.setEndTime(null);
+
+        Visit updatedVisit = repository.save(visit);
+        return mapper.toDto(updatedVisit);
     }
 
     private List<Visit> applyFifoOrder(List<Visit> visits) {
