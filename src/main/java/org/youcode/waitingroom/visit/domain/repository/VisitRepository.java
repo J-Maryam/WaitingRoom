@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 import org.youcode.waitingroom.visit.domain.entity.Visit;
 import org.youcode.waitingroom.visit.domain.entity.VisitId;
 
+import java.util.List;
+
 @Repository
 public interface VisitRepository extends JpaRepository<Visit, VisitId> {
     Page<Visit> findByWaitingRoomId(Long waitingRoomId, Pageable pageable);
+    List<Visit> findByWaitingRoomId(Long waitingRoomId);
 }
