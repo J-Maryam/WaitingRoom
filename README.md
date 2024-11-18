@@ -48,7 +48,7 @@ L'architecture de **WRM** suit une approche modulaire, permettant une gestion fl
 ### Installation
 1. Clonez le dépôt du projet :
    ```bash
-   [git clone https://github.com/username/wrm.git](https://github.com/J-Maryam/WaitingRoom.git)
+   git clone https://github.com/J-Maryam/WaitingRoom.git
    cd wrm
    ```
 
