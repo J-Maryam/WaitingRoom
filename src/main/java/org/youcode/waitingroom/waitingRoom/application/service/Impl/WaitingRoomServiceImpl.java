@@ -1,5 +1,6 @@
 package org.youcode.waitingroom.waitingRoom.application.service.Impl;
 
+import jakarta.validation.ValidationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
@@ -12,6 +13,8 @@ import org.youcode.waitingroom.waitingRoom.application.mapper.WaitingRoomMapper;
 import org.youcode.waitingroom.waitingRoom.application.service.WaitingRoomService;
 import org.youcode.waitingroom.waitingRoom.domain.entity.WaitingRoom;
 import org.youcode.waitingroom.waitingRoom.domain.repository.WaitingRoomRepository;
+
+import java.time.LocalDate;
 
 @Service
 @Transactional
@@ -31,6 +34,9 @@ public class WaitingRoomServiceImpl extends GenericServiceImpl<WaitingRoom, Long
 
     @Override
     public WaitingRoomResponseDTO create(WaitingRoomRequestDTO requestDto) {
+        if (requestDto.date() != null && requestDto.date().isBefore(LocalDate.now())) {
+            throw new ValidationException("Date must be present or future");
+        }
         WaitingRoom waitingRoom = mapper.toEntity(requestDto);
 
         if (requestDto.mode() == null) {
